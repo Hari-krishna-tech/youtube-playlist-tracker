@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/1cde24e7-5c59-4f32-b4e4-a0f0c2ba2b44)Creating an application like YTLearning with the specified features involves several steps, from setting up your development environment to deploying the application. Below is a step-by-step guide to help you through the process:
+Creating an application like YTLearning with the specified features involves several steps, from setting up your development environment to deploying the application. Below is a step-by-step guide to help you through the process:
 
 ### Step 1: Set Up Your Development Environment
 
