@@ -3,7 +3,7 @@ import { useAppDispatch } from "../app/hooks";
 import { logout } from "../features/auth/authSlice";
 
 const api = axios.create({
-  baseURL: "http://localhost:8000/api/",
+  baseURL: "http://localhost:8080/api/",
   withCredentials: true, // include cookies in requests
   headers: {
     "Content-Type": "application/json",

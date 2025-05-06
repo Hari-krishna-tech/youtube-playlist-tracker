@@ -5,6 +5,7 @@ import { useAppSelector } from '../app/hooks';
 import LoadingSpinner from '../components/LoadingSpinner';
 
 
+
 const ProtectedRoute: React.FC = () => {
     const {isAuthenticated, isLoading} = useAppSelector((state) => state.auth);
     const location = useLocation();
