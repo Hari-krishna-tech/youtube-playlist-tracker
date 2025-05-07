@@ -2,6 +2,8 @@ import React from "react";
 import { BrowserRouter , Routes, Route } from "react-router-dom";
 import LandingPage from "../pages/LandingPage";
 import DashboardPage from "../pages/DashboardPage";
+import DashboardPlaylists from "../pages/DashboardPlaylists";
+import DashboardAddPlaylist from "../pages/DashboardAddPlaylist";
 import OAuthFallbackPage from "../pages/OAuthFallbackPage";
 import ProtectedRoute from "./ProtectedRoute";
 import AuthProvider from "../features/auth/AuthProvider";
@@ -19,7 +21,11 @@ const AppRoutes: React.FC = () => {
                 <Route path="/oauth-fallback" element={<OAuthFallbackPage />} />
                 {/* Protected Routes */}
                 <Route element={<ProtectedRoute />}>
-                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/dashboard" element={<DashboardPage />}>
+                        <Route index element={<DashboardPlaylists />} />
+                        <Route path="playlists" element={<DashboardPlaylists />} />
+                        <Route path="add" element={<DashboardAddPlaylist />} />
+                    </Route>
                     {/* Add more protected routes here */}
                 </Route>
 
