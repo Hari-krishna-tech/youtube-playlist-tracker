@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAppSelector } from '../app/hooks';
 import '../styles/LandingPage.css';
-import landing_page_2 from '../assets/landing_page_2.jpg';
+import landing_page_2 from '../assets/photo_banner_1.jpg';
 const LandingPage: React.FC = () => {
     const {isAuthenticated} = useAppSelector(state => state.auth);
     const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 
 interface Playlist {
+  id: number;
   youtubePlaylistId: string;
   title: string;
   description: string;
@@ -30,10 +31,15 @@ const DashboardPlaylists: React.FC = () => {
   const fetchPlaylists = async () => {
     try {
       const response = await api.get("/playlist/");
+      console.log(response.data);
       setPlaylists(response.data);
     } catch (error) {
       setError("Failed to load playlists");
     }
+  };
+
+  const handlePlaylistClick = (playlistId: number) => {
+    navigate(`/dashboard/playlist/${playlistId}`);
   };
 
   return (
@@ -44,33 +50,50 @@ const DashboardPlaylists: React.FC = () => {
       </div>
       {error && <p className="error-message">{error}</p>}
       <div className="playlist-grid">
-        {playlists.map((playlist) => {
-          const percent = playlist.itemCount > 0 ? Math.round((playlist.totalCompletions / playlist.itemCount) * 100) : 0;
-          return (
-            <div key={playlist.youtubePlaylistId} className="playlist-card">
-              <div className="playlist-thumbnail">
-                <img 
-                  src={playlist.thumbnailHighUrl || playlist.thumbnailMediumUrl || playlist.thumbnailDefaultUrl || ''} 
-                  alt={playlist.title}
-                />
-              </div>
-              <div className="playlist-info">
-                <h3>{playlist.title}</h3>
-                <p className="channel-name">{playlist.channelTitle}</p>
-                <p className="video-count">{playlist.itemCount} videos</p>
-                <p className="playlist-description">{playlist.description}</p>
-                <div className="playlist-progress-bar">
-                  <div className="progress-bar-bg">
-                    <div className="progress-bar-fill" style={{width: percent + '%'}} />
-                  </div>
-                  <div className="progress-bar-label">
-                    {playlist.totalCompletions} of {playlist.itemCount} completed ({percent}%)
+        {playlists.length === 0 ? (
+          <div className="no-playlists-message">
+            <p>You don't have any playlists yet. Add a playlist to start learning!</p>
+          </div>
+        ) : (
+          playlists.map((playlist) => {
+            const percent = playlist.itemCount > 0 ? Math.round((playlist.totalCompletions / playlist.itemCount) * 100) : 0;
+            return (
+              <div 
+                key={playlist.youtubePlaylistId} 
+                className="playlist-card"
+                onClick={() => handlePlaylistClick(playlist.id)}
+                role="button"
+                tabIndex={0}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    handlePlaylistClick(playlist.id);
+                  }
+                }}
+              >
+                <div className="playlist-thumbnail">
+                  <img 
+                    src={playlist.thumbnailHighUrl || playlist.thumbnailMediumUrl || playlist.thumbnailDefaultUrl || ''} 
+                    alt={playlist.title}
+                  />
+                </div>
+                <div className="playlist-info">
+                  <h3>{playlist.title}</h3>
+                  <p className="channel-name">{playlist.channelTitle}</p>
+                  <p className="video-count">{playlist.itemCount} videos</p>
+                  <p className="playlist-description">{playlist.description}</p>
+                  <div className="playlist-progress-bar">
+                    <div className="progress-bar-bg">
+                      <div className="progress-bar-fill" style={{width: percent + '%'}} />
+                    </div>
+                    <div className="progress-bar-label">
+                      {playlist.totalCompletions} of {playlist.itemCount} completed ({percent}%)
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </section>
   );

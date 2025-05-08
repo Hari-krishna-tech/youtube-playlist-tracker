@@ -4,6 +4,7 @@ import LandingPage from "../pages/LandingPage";
 import DashboardPage from "../pages/DashboardPage";
 import DashboardPlaylists from "../pages/DashboardPlaylists";
 import DashboardAddPlaylist from "../pages/DashboardAddPlaylist";
+import PlaylistDetailPage from "../pages/PlaylistDetailPage";
 import OAuthFallbackPage from "../pages/OAuthFallbackPage";
 import ProtectedRoute from "./ProtectedRoute";
 import AuthProvider from "../features/auth/AuthProvider";
@@ -25,6 +26,7 @@ const AppRoutes: React.FC = () => {
                         <Route index element={<DashboardPlaylists />} />
                         <Route path="playlists" element={<DashboardPlaylists />} />
                         <Route path="add" element={<DashboardAddPlaylist />} />
+                        <Route path="playlist/:id" element={<PlaylistDetailPage />} />
                     </Route>
                     {/* Add more protected routes here */}
                 </Route>

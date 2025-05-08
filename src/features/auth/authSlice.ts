@@ -19,6 +19,7 @@ export const checkAuthStatus = createAsyncThunk(
       // this endpoint should return the user info if cookies are valid
       // and 401/403 otherwise
       const response = await api.get("/users/me");
+      console.log("in refresh step")
       console.log(response.data)
       return response.data; // assuming the response contains user data
     } catch (error: any) {
